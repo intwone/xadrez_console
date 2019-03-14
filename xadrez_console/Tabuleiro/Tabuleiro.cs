@@ -10,5 +10,10 @@
             this.colunas = colunas;
             pecas = new Peca[linhas, colunas]; // peças recebe uma nova matriz[quantidade_linhas, quantidade_colunas]
         }
+
+        // Acesso as pecas[,]
+        public Peca peca(int linha, int coluna) {
+            return pecas[linha, coluna];
+        }
     }
 }
