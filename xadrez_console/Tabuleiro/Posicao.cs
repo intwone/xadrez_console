@@ -1,4 +1,4 @@
-﻿namespace Tabuleiro {
+﻿namespace tabuleiro {
     class Posicao {
         public int linha { get; set; }
         public int coluna { get; set; }
@@ -8,7 +8,7 @@
             this.coluna = coluna;
         }
 
-        // ToString da classe posição
+        // ToString da classe posição - conversão 
         public override string ToString() {
             return linha + ", " + coluna;
         }
