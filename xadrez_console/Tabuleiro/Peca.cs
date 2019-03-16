@@ -7,8 +7,8 @@
         public Tabuleiro tabuleiro { get; set; }
 
         // Construtor
-        public Peca(Posicao posicao, Tabuleiro tab, Cor cor) { // Uma nova peça recebe uma nova posição, tabuleiro e cor
-            this.posicao = posicao;
+        public Peca(Tabuleiro tab, Cor cor) { // Uma nova peça recebe uma nova posição, tabuleiro e cor
+            this.posicao = null; // Ao criar uma peça ele não tem posição, ou seja, ela é null
             this.tabuleiro = tab;
             this.cor = cor;
             this.qtdMovimentos = 0; // quantidade de movimentos iniciando em zero

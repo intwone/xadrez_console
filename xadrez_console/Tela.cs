@@ -10,7 +10,7 @@ namespace xadrez_console {
                         Console.Write("- ");
                     }
                     else {
-                        Console.WriteLine(tab.peca(i, j) + " "); // chamando o objeto peça no método tab
+                        Console.Write(tab.peca(i, j) + " "); // chamando o objeto peça no método tab
                     }
                 }
                 Console.WriteLine();

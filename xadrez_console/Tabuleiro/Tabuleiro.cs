@@ -15,5 +15,11 @@
         public Peca peca(int linha, int coluna) {
             return pecas[linha, coluna];
         }
+
+        // Função para colocar uma peca
+        public void colocarPeca(Peca p, Posicao pos) {
+            pecas[pos.linha, pos.coluna] = p; // Acessa a matriz na posicao (linha, coluna) e coloca a peca p
+            p.posicao = pos; // Posicao da peca p receberá a posicao pos
+        }
     }
 }
