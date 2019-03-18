@@ -1,5 +1,6 @@
 ﻿using System;
 using tabuleiro;
+using xadrez;
 
 namespace xadrez_console {
     class Tela {
@@ -18,6 +19,14 @@ namespace xadrez_console {
                 Console.WriteLine();
             }
             Console.WriteLine("  A B C D E F G H"); // Após a impressão do tabuleiro, imprimir a linha com as letras de cada coluna
+        }
+
+        public static PosicaoXadrez lerPosicaoXadrez() { // Lê do teclado o que o usuário digitou
+            string s = Console.ReadLine();
+            char coluna = s[0]; // primeira letra digitada pelo usuário (ex.: (c, 1), pegará somente o c, que é a referente a linha)
+            int linha = int.Parse(s[1] + "");
+            return new PosicaoXadrez(coluna, linha);
+
         }
 
         public static void imprimirPeca(Peca peca) {

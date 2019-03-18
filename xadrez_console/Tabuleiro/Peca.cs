@@ -13,5 +13,10 @@
             this.cor = cor;
             this.qtdMovimentos = 0; // quantidade de movimentos iniciando em zero
         }
+
+        // Metodo para incrementar a quantidade de movimentos (qtdMovimentos)
+        public void incrementarQtdMovimentos() {
+            qtdMovimentos++;
+        }
     }
 }

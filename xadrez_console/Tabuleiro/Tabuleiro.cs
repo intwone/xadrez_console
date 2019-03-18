@@ -37,6 +37,18 @@ namespace tabuleiro {
             p.posicao = pos; // Posicao da peca p receberá a posicao pos
         }
 
+        // Função para retirar uma peca
+        public Peca retirarPeca(Posicao pos) { // retorna a peça
+            if (peca(pos) == null) { // Se a peca que tiver na posicao for igual a null, quer dizer que não tem peca 
+                return null; // Não teve peca para ser retirada
+            }
+            // Ao passar do if acima, significa que terá alguma peca na posicao pos
+            Peca aux = peca(pos); // a peca aux recebe a peca que está na posição informada pos
+            aux.posicao = null; // retira a peça do tabuleiro
+            pecas[pos.linha, pos.coluna] = null;
+            return aux;
+        }
+
         // Metodo de posição válida
         public bool posicaoValida(Posicao pos) { // Testa se a posicao pos é valida ou não
             if (pos.linha < 0 || pos.linha >= linhas || pos.coluna < 0 || pos.coluna >= colunas) {
