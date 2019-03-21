@@ -4,8 +4,8 @@ using tabuleiro;
 namespace xadrez {
     class PartidaDeXadrez {
         public Tabuleiro tab { get; private set; }
-        private int turno; // contagem de de jogadas
-        private Cor jogadorAtual; // Indicar de quem será a vez de jogar
+        public int turno { get; private set; } // contagem de de jogadas
+        public Cor jogadorAtual { get; private set; } // Indicar de quem será a vez de jogar
         public bool terminada { get; private set; } 
 
         public PartidaDeXadrez() {
@@ -21,6 +21,40 @@ namespace xadrez {
             p.incrementarQtdMovimentos(); // Incrementa a quantidade de movimentos da peca p
             Peca pecaCapturada = tab.retirarPeca(destino); // Retira a peça do destino, caso exista
             tab.colocarPeca(p, destino); // coloca a peça no destino
+        }
+
+        public void realizaJogada(Posicao origem, Posicao destino) {
+            executaMovimento(origem, destino);
+            turno++; // incrementa o turno, passando para a próxima jogada
+            mudaJogador();
+        }
+
+        // Tratamento de exeções 
+        public void validarPosicaoDeOrigem(Posicao pos) {
+            if (tab.peca(pos) == null) { // Se no tabuleiro a peca que está na posicao pos for igual a null
+                throw new TabuleiroException("Não existe peça na posição de origem escolhida!");
+            }
+            if (jogadorAtual != tab.peca(pos).cor) { // Só pode escolher uma peça na posição onde tem uma peça da mesma cor do jogador atual
+                throw new TabuleiroException("A peça de origem escolhida não é sua!");
+            }
+            if (!tab.peca(pos).existeMovimentosPossiveis()) { // Se não existe movimentos possíveis
+                throw new TabuleiroException("Não há movimentos possíveis para a peça de origem escolhida!");
+            }
+        }
+
+        public void validarPosicaoDeDestino(Posicao origem, Posicao destino) {
+            if (!tab.peca(origem).podeMoverPara(destino)) { // Se a peça de origem NÃO pode mover para a posição de destino
+                throw new TabuleiroException("Posição de destino inválida");
+            }
+        }
+
+        public void mudaJogador() {
+            if (jogadorAtual == Cor.Branca) {
+                jogadorAtual = Cor.Preta;
+            }
+            else {
+                jogadorAtual = Cor.Branca;
+            }
         }
 
         private void colocarPecas() {
