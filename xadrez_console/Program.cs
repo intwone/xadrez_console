@@ -13,10 +13,7 @@ namespace xadrez_console {
                 while(!partida.terminada){ // Enquanto a partida não estiver terminada
                     try {
                         Console.Clear(); // Limpa a tela
-                        Tela.imprimirTabuleiro(partida.tab);
-                        Console.WriteLine();
-                        Console.WriteLine("Turno: " + partida.turno); // 
-                        Console.WriteLine("Aguardando jogada:" + partida.jogadorAtual);
+                        Tela.imprimirPartida(partida);
 
                         Console.WriteLine();
                         Console.Write("Origem: ");
@@ -35,16 +32,14 @@ namespace xadrez_console {
 
                         partida.realizaJogada(origem, destino);
                     }
-                    catch (TabuleiroException e) {
-                        Console.WriteLine(e.Message);
-                        Console.WriteLine();
+                    catch (TabuleiroException h) {
+                        Console.WriteLine(h.Message);
                     }
                 }
             }
             catch (TabuleiroException e) {
                 Console.WriteLine(e.Message);
             }
-            Console.WriteLine();
         }
     }
 }
