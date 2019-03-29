@@ -56,8 +56,14 @@ namespace xadrez {
             else {
                 xeque = false;
             }
-            turno++; // incrementa o turno, passando para a próxima jogada
-            mudaJogador();
+
+            if (testeXequemate(adversaria(jogadorAtual))) { // se esta em xequemate
+                terminada = true;
+            }
+            else {
+                turno++; // incrementa o turno, passando para a próxima jogada
+                mudaJogador();
+            }
         }
 
         // Tratamento de exeções 
@@ -145,6 +151,30 @@ namespace xadrez {
             return false;
         }
 
+        public bool testeXequemate(Cor cor) {
+            if (!estaEmXeque(cor)) { // se não estiver em xeque o rei dessa cor  
+                return false;
+            }
+            foreach (Peca x in pecasEmJogo(cor)) { // corre toda peca x no conjunto das pecas em jogo dessa cor
+                bool[,] mat = x.movimentoPossiveis();
+                for (int i = 0; i < tab.linhas; i++) { // corre as linhas da matriz
+                    for (int j = 0; j < tab.colunas; j++) { // corre as colunas da matriz
+                        if (mat[i, j]) { // se a matriz[i, j] estiver marcado como verdadeira
+                            Posicao origem = x.posicao;
+                            Posicao destino = new Posicao(i, j);
+                            Peca pecaCapturada = executaMovimento(origem, destino);
+                            bool testeXeque = estaEmXeque(cor);
+                            desfazMovimento(origem, destino, pecaCapturada);
+                            if (!testeXeque) { // se não esta mais em xeque 
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        
         public void colocarNovaPeca(char coluna, int linha, Peca peca) { // Dado uma coluna e linha de uma peça, faz...
             tab.colocarPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao()); // irá no tabuleiro da partida e colocará a peca
             pecas.Add(peca); // No conjunto pecas, adicionar uma peca no conjunto
